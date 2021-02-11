@@ -1,0 +1,20 @@
+version: "3.9"
+services:
+  # unlike the backend app, we have to attach to container and edit code directly, recommend running the angular app natively in windows and connect to the backend docker container
+  react:
+    build: ./frontend
+    environment:
+      NODE_ENV: development
+    volumes:
+      - ./frontend:/usr/src/houndrobin
+      - /usr/src/houndrobin/node_modules
+    expose:
+      - 3000
+    ports:
+      - "3000:3000"
+
+  # files persist via volume between host and container
+  django:
+    build: ./backend
+    ports:
+      - "8000:8000"
