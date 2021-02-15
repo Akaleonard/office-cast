@@ -6,8 +6,7 @@ services:
     environment:
       NODE_ENV: development
     volumes:
-      - ./frontend:/usr/src/houndrobin
-      - /usr/src/houndrobin/node_modules
+      - ./frontend:/code
     expose:
       - 3000
     ports:
@@ -16,5 +15,15 @@ services:
   # files persist via volume between host and container
   django:
     build: ./backend
+    volumes:
+      - ./backend:/code
     ports:
       - "8000:8000"
+  primary-db:
+    image: mongo
+    expose:
+      - 27017
+    ports:
+      - "27017:27017"
+    restart: always
+    entrypoint: ["/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0"]
