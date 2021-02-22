@@ -19,6 +19,7 @@ services:
       - ./backend:/code
     ports:
       - "8000:8000"
+
   primary-db:
     image: mongo
     expose:

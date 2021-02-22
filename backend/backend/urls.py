@@ -20,11 +20,11 @@ from media import views
 from rest_framework import routers
 
 router = routers.DefaultRouter()
-router.register(r'media', views.EchoViewSet, basename='M')
+router.register(r'media', views.ShowViewSet)
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('', include(router.urls)),
-    url('media/', views.EchoViewSet.as_view()),
+    path('', include(router.urls)),
+
 ]
